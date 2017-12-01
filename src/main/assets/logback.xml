@@ -1,0 +1,112 @@
+<!--debug属性用来决定是否打印logback的日志信息-->
+<configuration debug='false'>
+
+    <!--声明一个属性,用来指定log文件存放的路径-->
+    <property name="LOG_DIR" value="/sdcard/logs"/>
+
+    <!--声明一个时间戳-->
+    <timestamp datePattern="yyyy-MM-dd_HH-mm" key="today"/>
+
+    <!--用于在控制台输出的Appender-->
+    <!--<appender name="LOGCAT" class="ch.qos.logback.classic.android.LogcatAppender">-->
+        <!--<encoder>-->
+            <!--<pattern>%-5relative [%thread][%file:%M:%line] - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <appender name="LOGCAT" class="com.example.logbackdemo.MyLogcatAppender">
+        <encoder>
+            <pattern>%d{HH} %-5relative [%thread][%file:%M:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--声明一个向http服务器输出的Appender（come soon）-->
+
+    <!--声明一个RollingFileAppender-->
+    <appender name="BASE_ROLL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${today}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%date %-5relative [%thread] %-5level %logger{36} [%file:%M:%line] - %msg%n
+            </pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <!--最大保存7天的日志-->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <!--文件大于10mb,切换文件-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <appender name="SQL" class="ch.qos.logback.classic.android.SQLiteAppender">
+        <encoder>
+            <pattern>%-5relative [%thread][%file:%M:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="IMPL" class="com.example.logbackdemo.MySQLiteAppender">
+        <encoder>
+            <pattern>%-5relative [%thread][%file:%M:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LITEPAL" class="com.example.logbackdemo.LitePalAppender">
+        <encoder>
+            <pattern>%-5relative [%thread][%file:%M:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Write INFO (and higher-level) messages to the log file -->
+    <root level="TRACE">
+        <appender-ref ref="BASE_ROLL_FILE"/>
+        <appender-ref ref="LOGCAT"/>
+
+        <appender-ref ref="SQL"/>
+        <appender-ref ref="IMPL"/>
+
+        <appender-ref ref="LITEPAL"/>
+    </root>
+
+    <appender name="CusLayoutAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <!--自定义layout-->
+            <layout class="com.example.logbackdemo.CustomLayout">
+                <!--自定义layout类中的变量，可以通过<layout>标签下<属性名>的方式来使用set方法赋值-->
+                <prefix>Walker113</prefix>
+                <printThreadName>true</printThreadName>
+            </layout>
+        </encoder>
+    </appender>
+
+    <logger name="RecordLogger">
+        <appender-ref ref="RLOGCAT"/>
+        <appender-ref ref="CusLayoutAppender"/>
+    </logger>
+
+    <logger name="">
+
+    </logger>
+
+    <appender name="RLOGCAT" class="com.example.logbackdemo.MyLogcatAppender">
+        <encoder>
+            <pattern>%X{first} %X{last} ----- [%d{HH}] %-5relative [%thread][%file:%M:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="L_APP"></logger>
+
+    <appender name=""></appender>
+    <!--支持的level-->
+    <!--TRACE-->
+    <!--DEBUG-->
+    <!--INFO-->
+    <!--WARN-->
+    <!--ERROR-->
+
+</configuration>
