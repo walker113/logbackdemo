@@ -2,7 +2,6 @@ package com.example.logbackdemo.apag;
 
 import android.text.TextUtils;
 
-import com.jingang.ad_fabuyun.constant.Config;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -81,7 +80,6 @@ public class LogC {
     }
 
     private static void innerLogMethod(String localFQCN, Marker marker, Level level, String msg, Object[] params, Throwable t) {
-        if (Config.switch_log.equals(Config.OFF)) return;
 
         try {
             innerMethod.invoke(innerLogger, localFQCN, marker, level, msg, params, t);
@@ -91,7 +89,6 @@ public class LogC {
     }
 
     private static void innerLogMethod(String table, String localFQCN, Marker marker, Level level, String msg) {
-        if (Config.switch_log.equals(Config.OFF)) return;
         MDC.put(TAB, table);
 
         try {

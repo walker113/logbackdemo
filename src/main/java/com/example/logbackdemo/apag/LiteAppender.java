@@ -2,8 +2,6 @@ package com.example.logbackdemo.apag;
 
 import android.util.Log;
 
-import com.jingang.ad_fabuyun.table.Ad_Log;
-import com.jingang.ad_fabuyun.table.BootLog;
 import com.socks.library.KLog;
 
 import org.slf4j.MDC;
@@ -94,10 +92,10 @@ public class LiteAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
     }
 
     private void UpdateAdLog () {
-        Ad_Log ad_log = new Ad_Log();
-
-
-        ad_log.save();
+//        Ad_Log ad_log = new Ad_Log();
+//
+//
+//        ad_log.save();
     }
 
     /**
@@ -129,21 +127,6 @@ public class LiteAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
         long timeStamp = event.getTimeStamp();
         String threadName = event.getThreadName();
         String formattedMessage = this.encoder.getLayout().doLayout(event);
-
-        BootLog bootLog = new BootLog();
-        bootLog.setMsg(formattedMessage);
-        bootLog.setTime(String.valueOf(timeStamp));
-        bootLog.setThread(threadName);
-
-        StackTraceElement stack = event.getCallerData()[0];
-        bootLog.setCaller_filename_index(stack.getFileName());
-        bootLog.setCaller_class_index(stack.getClassName());
-        bootLog.setCaller_method_index(stack.getMethodName());
-        bootLog.setCaller_line_index(Integer.toString(stack.getLineNumber()));
-
-        bootLog.save();
-
-
 
         switch (event.getLevel().levelInt) {
             case Level.ALL_INT:

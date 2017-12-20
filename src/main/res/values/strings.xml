@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LogbackDemo</string>
+    <string name="title_activity_network">NetworkActivity</string>
+
+    <!--Network相关-->
+    <string name="network_open_wireless_settings">Open Wireless Settings</string>
+    <string name="network_set_data_enabled">Set Data Enabled</string>
+    <string name="network_set_wifi_enabled">Set Wifi Enabled</string>
+
 </resources>

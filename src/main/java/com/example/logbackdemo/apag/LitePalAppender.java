@@ -1,7 +1,6 @@
 package com.example.logbackdemo.apag;
 
 
-import com.jingang.ad_fabuyun.table.Ad_Log;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
@@ -25,8 +24,8 @@ public class LitePalAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
 
     private void saveAD_log () {
-        Ad_Log log = new Ad_Log();
-        log.save();
+//        Ad_Log log = new Ad_Log();
+//        log.save();
     }
 
     private void saveRecordTable () {

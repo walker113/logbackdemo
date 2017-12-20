@@ -109,4 +109,18 @@
     <!--WARN-->
     <!--ERROR-->
 
+
+    <!--LitePal Appender -->
+    <appender name="LITE_PAL_APPENDER" class="com.example.logbackdemo.sql.LitePalAppender">
+        <encoder>
+            <pattern>%X{table} %X{type} %d{HH:mm:ss} %-5level %-5relative [%thread][%file:%M:%line] - %msg</pattern>
+        </encoder>
+        <maxHistory>2 day</maxHistory>
+    </appender>
+    <logger name="Log" level="TRACE" additivity="false" >
+        <appender-ref ref="LITE_PAL_APPENDER"/>
+        <!--<appender-ref ref="FILE"/>-->
+    </logger>
+
+
 </configuration>

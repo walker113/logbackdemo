@@ -1,8 +1,6 @@
 package com.example.logbackdemo.apag;
 
 
-import com.jingang.ad_fabuyun.utils.LogUpload;
-import com.jingang.ad_fabuyun.utils.RecordUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,15 +23,12 @@ public class LogB {
 
 
     public static void i(String advert_id) {
-        RecordUtil.getInstance().updateRecodeTable(advert_id, 1);
     }
 
     public static void i(String type, int tag) {
-        LogUpload.getLogUpload().dbUpdate(type, tag);
     }
 
     public static void i(String type, int tag, String msg) {
-        LogUpload.getLogUpload().dbUpdate(type, tag, msg);
     }
 
 
